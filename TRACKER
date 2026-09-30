@@ -4,209 +4,308 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Konsekuensi Aka Tracker</title>
+<title>Consequence Tracker</title>
 
 <style>
+:root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card2: #111827;
+    --border: #334155;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --blue: #3b82f6;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #e5e7eb;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+header {
+    padding: 30px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #1e3a8a, #312e81);
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+header p {
+    margin: 0;
+    color: #cbd5e1;
 }
 
 .container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-}
-
-.hero {
-    background: linear-gradient(135deg, #1e293b, #111827);
-    padding: 24px;
-    border-radius: 20px;
-    margin-bottom: 18px;
-    border: 1px solid #334155;
-}
-
-h1 {
-    margin: 0 0 8px;
-    font-size: 27px;
-}
-
-.muted {
-    color: #94a3b8;
-    font-size: 14px;
-}
-
-.toolbar {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 15px 0;
-}
-
-button {
-    border: 0;
-    border-radius: 10px;
-    padding: 11px 15px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.primary {
-    background: #22c55e;
-    color: #052e16;
-}
-
-.secondary {
-    background: #334155;
-    color: white;
-}
-
-.danger {
-    background: #ef4444;
-    color: white;
-}
-
-input,
-textarea {
-    width: 100%;
-    background: #111827;
-    color: white;
-    border: 1px solid #475569;
-    border-radius: 10px;
-    padding: 11px;
+    width: min(1100px, 94%);
+    margin: 30px auto;
 }
 
 .card {
-    background: #1e293b;
-    border: 1px solid #334155;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 17px;
-    margin: 12px 0;
+    padding: 22px;
+    margin-bottom: 20px;
 }
 
-.dayhead {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+.card h2 {
+    margin-top: 0;
 }
 
-.datebox {
-    display: flex;
-    gap: 8px;
-    align-items: center;
+.warning {
+    background: #451a03;
+    border: 1px solid #92400e;
+    padding: 16px;
+    border-radius: 12px;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
-.datebox input {
-    width: auto;
-}
-
-.progress {
-    height: 12px;
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    margin-bottom: 15px;
+    border-radius: 9px;
+    border: 1px solid #475569;
     background: #0f172a;
-    border-radius: 99px;
-    overflow: hidden;
-    margin: 12px 0;
+    color: white;
 }
 
-.bar {
-    height: 100%;
-    background: #22c55e;
-    width: 0%;
-    transition: 0.25s;
+input[type="checkbox"] {
+    width: auto;
+    margin: 0;
 }
 
-.item {
-    background: #111827;
-    border-radius: 13px;
-    padding: 14px;
-    margin: 10px 0;
-    border: 1px solid #334155;
+label {
+    color: #cbd5e1;
+    font-size: 14px;
 }
 
-.item.done {
-    border-color: #22c55e;
-}
-
-.row {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-}
-
-.check {
-    width: 22px;
-    height: 22px;
-    margin-top: 2px;
-    accent-color: #22c55e;
-}
-
-.title {
+button {
+    border: none;
+    border-radius: 9px;
+    padding: 12px 18px;
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.status {
-    font-size: 12px;
-    color: #94a3b8;
-    margin-top: 5px;
+button:hover {
+    transform: translateY(-1px);
+    opacity: .9;
 }
 
-.proof {
-    margin-top: 10px;
-    display: none;
+.btn-blue {
+    background: var(--blue);
+    color: white;
 }
 
-.done .proof {
-    display: block;
+.btn-green {
+    background: var(--green);
+    color: #052e16;
+}
+
+.btn-red {
+    background: var(--red);
+    color: white;
+}
+
+.btn-gray {
+    background: #475569;
+    color: white;
 }
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
 }
 
 .stat {
-    background: #111827;
-    border-radius: 13px;
-    padding: 14px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
     text-align: center;
 }
 
-.num {
-    font-size: 25px;
-    font-weight: 800;
+.stat-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #60a5fa;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.progress-wrapper {
+    margin-top: 20px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 20px;
+    background: #334155;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: var(--green);
+    transition: .3s;
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: 8px;
+    color: var(--muted);
+}
+
+.consequence {
+    background: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+.consequence-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.consequence-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.target {
+    color: #60a5fa;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.status {
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #422006;
+    color: #fbbf24;
+}
+
+.status-done {
+    background: #052e16;
+    color: #4ade80;
+}
+
+.status-failed {
+    background: #450a0a;
+    color: #f87171;
+}
+
+.check-area {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.history-item {
+    background: #0f172a;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.approved {
+    color: #4ade80;
+}
+
+.not-approved {
+    color: #fbbf24;
+}
+
+.penalty-box {
+    background: #450a0a;
+    border: 1px solid #991b1b;
+    padding: 15px;
+    border-radius: 10px;
+    line-height: 1.7;
+}
+
+.success-box {
+    background: #052e16;
+    border: 1px solid #166534;
+    padding: 15px;
+    border-radius: 10px;
+    line-height: 1.7;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .small {
-    font-size: 12px;
-    color: #94a3b8;
+    color: var(--muted);
+    font-size: 13px;
 }
 
-.footer {
+footer {
     text-align: center;
-    color: #64748b;
-    padding: 20px;
+    color: var(--muted);
+    padding: 30px;
 }
 
-@media(max-width:600px) {
+@media(max-width: 700px) {
+
     .stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .container {
-        padding: 12px;
+    .consequence-top {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    h1 {
-        font-size: 23px;
+    header h1 {
+        font-size: 25px;
     }
 }
 </style>
@@ -214,71 +313,519 @@ textarea {
 
 <body>
 
+<header>
+    <h1>⚡ CONSEQUENCE TRACKER</h1>
+    <p>Daily Accountability System</p>
+</header>
+
 <div class="container">
 
-<!-- HEADER -->
-<section class="hero">
-    <h1>🔥 Konsekuensi Aka — Daily Tracker</h1>
-
-    <div class="muted">
-        Catat pemenuhan konsekuensi setiap hari.
-        Data tersimpan otomatis di browser.
+    <div class="warning">
+        <strong>DISCLAIMER</strong><br>
+        Sistem ini digunakan sebagai pencatatan dan accountability pribadi.
+        Jangan memaksakan aktivitas fisik apabila sedang sakit, cedera,
+        pusing, atau kondisi tubuh tidak memungkinkan.
     </div>
-</section>
 
 
-<!-- STATISTIK -->
-<div class="stats">
+    <!-- DATE -->
+    <div class="card">
 
-    <div class="stat">
-        <div class="num" id="totalDone">0</div>
-        <div class="small">
-            Selesai hari ini
+        <h2>📅 Data Hari</h2>
+
+        <label>Tanggal</label>
+        <input type="date" id="date">
+
+        <label>Nama</label>
+        <input
+            type="text"
+            id="name"
+            placeholder="Masukkan nama"
+        >
+
+        <div class="buttons">
+            <button class="btn-blue" onclick="loadDay()">
+                📂 Load Data
+            </button>
+
+            <button class="btn-gray" onclick="newDay()">
+                🆕 Hari Baru
+            </button>
         </div>
+
     </div>
 
-    <div class="stat">
-        <div class="num" id="percent">0%</div>
-        <div class="small">
-            Progress hari ini
-        </div>
-    </div>
 
-    <div class="stat">
-        <div class="num" id="daysDone">0</div>
-        <div class="small">
-            Hari lengkap
-        </div>
-    </div>
+    <!-- STATISTICS -->
+    <div class="card">
 
-</div>
+        <h2>📊 Progress Hari Ini</h2>
 
+        <div class="stats">
 
-<!-- PILIH TANGGAL -->
-<div class="card">
+            <div class="stat">
+                <div class="stat-number" id="total">
+                    6
+                </div>
 
-    <div class="dayhead">
-
-        <div>
-            <b>Pilih tanggal</b>
-
-            <div class="small">
-                Contoh: Kamis = Hari Pertama
+                <div class="stat-label">
+                    Total
+                </div>
             </div>
+
+            <div class="stat">
+                <div class="stat-number" id="done">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Terpenuhi
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number" id="failed">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Gagal
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number" id="percent">
+                    0%
+                </div>
+
+                <div class="stat-label">
+                    Progress
+                </div>
+            </div>
+
         </div>
 
-        <div class="datebox">
+        <div class="progress-wrapper">
+
+            <div class="progress-bg">
+                <div
+                    class="progress"
+                    id="progress"
+                ></div>
+            </div>
+
+            <div
+                class="progress-text"
+                id="progressText"
+            >
+                0 / 6
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONSEQUENCES -->
+    <div class="card">
+
+        <h2>⚠️ Konsekuensi</h2>
+
+
+        <!-- 1 -->
+        <div class="consequence">
+
+            <div class="consequence-top">
+
+                <div>
+                    <div class="consequence-title">
+                        1️⃣ Push Up
+                    </div>
+
+                    <div class="target">
+                        Target dasar: 30x
+                    </div>
+                </div>
+
+                <span
+                    id="status1"
+                    class="status status-pending"
+                >
+                    BELUM
+                </span>
+
+            </div>
+
+            <label>
+                Jumlah push up
+            </label>
 
             <input
-                type="date"
-                id="datePicker"
+                type="number"
+                id="pushup"
+                min="0"
+                placeholder="Contoh: 30"
             >
 
+            <div class="check-area">
+                <input
+                    type="checkbox"
+                    id="check1"
+                >
+
+                <label>
+                    Saya menyatakan konsekuensi ini
+                    telah terpenuhi
+                </label>
+            </div>
+
             <button
-                class="secondary"
-                onclick="today()"
+                class="btn-green"
+                onclick="approveItem(1)"
             >
-                Hari Ini
+                ✓ ACC
+            </button>
+
+        </div>
+
+
+        <!-- 2 -->
+        <div class="consequence">
+
+            <div class="consequence-top">
+
+                <div>
+                    <div class="consequence-title">
+                        2️⃣ Keliling Lapangan
+                    </div>
+
+                    <div class="target">
+                        Target dasar: 3x
+                    </div>
+                </div>
+
+                <span
+                    id="status2"
+                    class="status status-pending"
+                >
+                    BELUM
+                </span>
+
+            </div>
+
+            <label>
+                Jumlah putaran
+            </label>
+
+            <input
+                type="number"
+                id="lapangan"
+                min="0"
+                placeholder="Contoh: 3"
+            >
+
+            <div class="check-area">
+
+                <input
+                    type="checkbox"
+                    id="check2"
+                >
+
+                <label>
+                    Saya menyatakan konsekuensi ini
+                    telah terpenuhi
+                </label>
+
+            </div>
+
+            <button
+                class="btn-green"
+                onclick="approveItem(2)"
+            >
+                ✓ ACC
+            </button>
+
+        </div>
+
+
+        <!-- 3 -->
+        <div class="consequence">
+
+            <div class="consequence-top">
+
+                <div>
+                    <div class="consequence-title">
+                        3️⃣ Mandi
+                    </div>
+
+                    <div class="target">
+                        Target dasar: 2x sehari
+                    </div>
+                </div>
+
+                <span
+                    id="status3"
+                    class="status status-pending"
+                >
+                    BELUM
+                </span>
+
+            </div>
+
+            <label>
+                Jumlah mandi
+            </label>
+
+            <input
+                type="number"
+                id="mandi"
+                min="0"
+                placeholder="Contoh: 2"
+            >
+
+            <div class="check-area">
+
+                <input
+                    type="checkbox"
+                    id="check3"
+                >
+
+                <label>
+                    Saya menyatakan konsekuensi ini
+                    telah terpenuhi
+                </label>
+
+            </div>
+
+            <button
+                class="btn-green"
+                onclick="approveItem(3)"
+            >
+                ✓ ACC
+            </button>
+
+        </div>
+
+
+        <!-- 4 -->
+        <div class="consequence">
+
+            <div class="consequence-top">
+
+                <div>
+                    <div class="consequence-title">
+                        4️⃣ Belajar
+                    </div>
+
+                    <div class="target">
+                        Target: 3x seminggu,
+                        30-60 menit/sesi
+                    </div>
+                </div>
+
+                <span
+                    id="status4"
+                    class="status status-pending"
+                >
+                    BELUM
+                </span>
+
+            </div>
+
+            <label>
+                Jumlah sesi belajar minggu ini
+            </label>
+
+            <input
+                type="number"
+                id="belajarSesi"
+                min="0"
+                placeholder="Contoh: 3"
+            >
+
+            <label>
+                Durasi sesi hari ini (menit)
+            </label>
+
+            <input
+                type="number"
+                id="belajarMenit"
+                min="0"
+                placeholder="Contoh: 45"
+            >
+
+            <div class="check-area">
+
+                <input
+                    type="checkbox"
+                    id="check4"
+                >
+
+                <label>
+                    Saya menyatakan konsekuensi ini
+                    telah terpenuhi
+                </label>
+
+            </div>
+
+            <button
+                class="btn-green"
+                onclick="approveItem(4)"
+            >
+                ✓ ACC
+            </button>
+
+        </div>
+
+
+        <!-- 5 -->
+        <div class="consequence">
+
+            <div class="consequence-top">
+
+                <div>
+                    <div class="consequence-title">
+                        5️⃣ Jogging
+                    </div>
+
+                    <div class="target">
+                        Minimal 5 km/jam
+                    </div>
+                </div>
+
+                <span
+                    id="status5"
+                    class="status status-pending"
+                >
+                    BELUM
+                </span>
+
+            </div>
+
+            <label>
+                Jarak (km)
+            </label>
+
+            <input
+                type="number"
+                id="jarak"
+                min="0"
+                step="0.01"
+                placeholder="Contoh: 5"
+            >
+
+            <label>
+                Kecepatan rata-rata (km/jam)
+            </label>
+
+            <input
+                type="number"
+                id="speed"
+                min="0"
+                step="0.01"
+                placeholder="Contoh: 5.5"
+            >
+
+            <label>
+                Bukti jogging
+            </label>
+
+            <input
+                type="file"
+                id="bukti"
+                accept="image/*,.pdf"
+            >
+
+            <p
+                class="small"
+                id="fileName"
+            >
+                Belum ada bukti.
+            </p>
+
+            <div class="check-area">
+
+                <input
+                    type="checkbox"
+                    id="check5"
+                >
+
+                <label>
+                    Saya menyatakan konsekuensi ini
+                    telah terpenuhi
+                </label>
+
+            </div>
+
+            <button
+                class="btn-green"
+                onclick="approveItem(5)"
+            >
+                ✓ ACC
+            </button>
+
+        </div>
+
+
+        <!-- 6 -->
+        <div class="consequence">
+
+            <div class="consequence-top">
+
+                <div>
+                    <div class="consequence-title">
+                        6️⃣ Klarifikasi di Second
+                    </div>
+
+                    <div class="target">
+                        Target: selama 1 bulan
+                    </div>
+                </div>
+
+                <span
+                    id="status6"
+                    class="status status-pending"
+                >
+                    BELUM
+                </span>
+
+            </div>
+
+            <label>
+                Status hari ini
+            </label>
+
+            <select id="klarifikasi">
+
+                <option value="belum">
+                    Belum dilakukan
+                </option>
+
+                <option value="sudah">
+                    Sudah dilakukan
+                </option>
+
+            </select>
+
+            <div class="check-area">
+
+                <input
+                    type="checkbox"
+                    id="check6"
+                >
+
+                <label>
+                    Saya menyatakan konsekuensi ini
+                    telah terpenuhi
+                </label>
+
+            </div>
+
+            <button
+                class="btn-green"
+                onclick="approveItem(6)"
+            >
+                ✓ ACC
             </button>
 
         </div>
@@ -286,752 +833,989 @@ textarea {
     </div>
 
 
-    <!-- PROGRESS -->
-    <div class="progress">
+    <!-- ADDITIONAL -->
+    <div class="card">
 
-        <div
-            class="bar"
-            id="bar"
-        ></div>
+        <h2>🙏 Konsekuensi Tambahan</h2>
 
-    </div>
+        <label>
+            Jumlah rekaman mengucapkan "minta maaf"
+        </label>
 
-    <div
-        id="progressText"
-        class="small"
-    >
-        0 dari 6 terpenuhi
-    </div>
+        <input
+            type="number"
+            id="maaf"
+            min="0"
+            placeholder="Target 200x"
+        >
 
-</div>
+        <div class="target">
+            Target: 200x
+        </div>
 
+        <br>
 
-<!-- LIST KONSEKUENSI -->
-<div id="list"></div>
+        <label>
+            Jumlah sit up
+        </label>
 
+        <input
+            type="number"
+            id="situp"
+            min="0"
+            placeholder="Target 50x"
+        >
 
-<!-- BUTTON -->
-<div class="toolbar">
+        <div class="target">
+            Target: 50x
+        </div>
 
-    <button
-        class="primary"
-        onclick="save()"
-    >
-        💾 Simpan
-    </button>
+        <br>
 
+        <label>
+            Status baterai HP
+        </label>
 
-    <button
-        class="secondary"
-        onclick="exportData()"
-    >
-        📤 Export Data
-    </button>
+        <select id="battery">
 
+            <option value="aman">
+                HP tidak mati
+            </option>
 
-    <button
-        class="secondary"
-        onclick="importData()"
-    >
-        📥 Import Data
-    </button>
+            <option value="mati">
+                HP mati / habis baterai
+            </option>
 
+        </select>
 
-    <button
-        class="danger"
-        onclick="resetDay()"
-    >
-        🗑️ Reset Hari Ini
-    </button>
+        <br>
 
-</div>
-
-
-<!-- CATATAN -->
-<div class="card">
-
-    <h3>
-        📝 Catatan Hari
-    </h3>
-
-    <textarea
-        id="dayNote"
-        rows="4"
-        placeholder="Contoh: Hari pertama semua konsekuensi sudah terpenuhi..."
-    ></textarea>
-
-</div>
-
-
-<!-- DAFTAR KONSEKUENSI -->
-<div class="card">
-
-    <h3>
-        📋 Daftar Konsekuensi
-    </h3>
-
-    <div class="small">
-
-        1. Push Up 30x
-        <br><br>
-
-        2. Keliling lapangan 3x
-        <br><br>
-
-        3. Mandi 2x sehari
-        <br><br>
-
-        4. Belajar 3x seminggu,
-        maksimal 30 menit–1 jam per sesi
-        <br><br>
-
-        5. Joging minimal 5 km/jam
-        + bukti aplikasi
-        <br><br>
-
-        6. Membuat klarifikasi di second
-        selama 1 bulan
+        <button
+            class="btn-blue"
+            onclick="saveAdditional()"
+        >
+            💾 Simpan Data
+        </button>
 
     </div>
 
+
+    <!-- PENALTY -->
+    <div class="card">
+
+        <h2>⚠️ Konsekuensi +5</h2>
+
+        <div id="penalty">
+            Belum ada data.
+        </div>
+
+    </div>
+
+
+    <!-- FINAL -->
+    <div class="card">
+
+        <h2>🔐 Final ACC</h2>
+
+        <p class="small">
+            Setelah seluruh konsekuensi hari tersebut
+            terpenuhi dan datanya benar, gunakan tombol
+            Final ACC.
+        </p>
+
+        <br>
+
+        <div class="buttons">
+
+            <button
+                class="btn-green"
+                onclick="finalApprove()"
+            >
+                ✅ ACC HARI INI
+            </button>
+
+            <button
+                class="btn-red"
+                onclick="resetDay()"
+            >
+                🗑️ Hapus Data Hari
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- HISTORY -->
+    <div class="card">
+
+        <h2>📋 Riwayat</h2>
+
+        <div id="history">
+            Belum ada riwayat.
+        </div>
+
+    </div>
+
 </div>
 
 
-<div class="footer">
-
-    Konsekuensi Aka Tracker
-    <br>
-    Data tersimpan secara lokal di browser.
-
-</div>
-
-</div>
+<footer>
+    Consequence Tracker • Data tersimpan di browser
+</footer>
 
 
 <script>
 
-/* =========================================
-   DATABASE LOCAL STORAGE
-========================================= */
+/* =====================================================
+   DATABASE LOCAL
+===================================================== */
 
-const KEY = "konsekuensi_aka_v1";
+let database =
+    JSON.parse(
+        localStorage.getItem("consequenceDatabase")
+    ) || {};
 
-let db = JSON.parse(
-    localStorage.getItem(KEY) || "{}"
-);
+let currentDate =
+    new Date().toISOString().split("T")[0];
 
-let selected = "";
-
-
-/* =========================================
-   DAFTAR KONSEKUENSI
-========================================= */
-
-const consequences = [
-
-    [
-        "pushup",
-        "Push Up 30x",
-        "Isi bukti/catatan jika sudah selesai."
-    ],
-
-    [
-        "lapangan",
-        "Keliling Lapangan 3x",
-        "Isi lokasi atau catatan."
-    ],
-
-    [
-        "mandi",
-        "Mandi 2x Sehari",
-        "Bisa tulis jam mandi pertama/kedua."
-    ],
-
-    [
-        "belajar",
-        "Belajar 3x Seminggu — 30 Menit–1 Jam",
-        "Isi materi dan durasi."
-    ],
-
-    [
-        "joging",
-        "Joging Minimal 5 km/jam + Bukti",
-        "Masukkan nama aplikasi dan bukti."
-    ],
-
-    [
-        "klarifikasi",
-        "Klarifikasi di Second — 1 Bulan",
-        "Isi tanggal/status klarifikasi."
-    ]
-
-];
+document.getElementById("date").value =
+    currentDate;
 
 
-/* =========================================
-   TANGGAL HARI INI
-========================================= */
+/* =====================================================
+   TARGET DASAR
+===================================================== */
 
-function dateNow() {
-
-    const d = new Date();
-
-    return d.toISOString().slice(0, 10);
-
-}
-
-
-/* =========================================
-   TOMBOL HARI INI
-========================================= */
-
-function today() {
-
-    document.getElementById(
-        "datePicker"
-    ).value = dateNow();
-
-    load();
-
-}
+const BASE = {
+    pushup: 30,
+    lapangan: 3,
+    mandi: 2,
+    belajarSesi: 3,
+    joggingSpeed: 5,
+    maaf: 200,
+    situp: 50
+};
 
 
-/* =========================================
-   AMBIL DATA HARI
-========================================= */
+/* =====================================================
+   GET DATA
+===================================================== */
 
-function getDay() {
+function getData(date) {
 
-    if (!db[selected]) {
+    if (!database[date]) {
 
-        db[selected] = {
+        database[date] = {
 
-            items: {},
+            name: "",
 
-            note: ""
+            items: {
+                1: null,
+                2: null,
+                3: null,
+                4: null,
+                5: null,
+                6: null
+            },
 
+            pushup: 0,
+            lapangan: 0,
+            mandi: 0,
+
+            belajarSesi: 0,
+            belajarMenit: 0,
+
+            jarak: 0,
+            speed: 0,
+            bukti: "",
+
+            klarifikasi: "belum",
+
+            maaf: 0,
+            situp: 0,
+
+            battery: "aman",
+
+            approved: false,
+
+            failedCount: 0,
+            addedPenalty: 0
         };
+    }
+
+    return database[date];
+}
+
+
+/* =====================================================
+   SAVE DATABASE
+===================================================== */
+
+function saveDatabase() {
+
+    localStorage.setItem(
+        "consequenceDatabase",
+        JSON.stringify(database)
+    );
+
+}
+
+
+/* =====================================================
+   LOAD DAY
+===================================================== */
+
+function loadDay() {
+
+    currentDate =
+        document.getElementById("date").value;
+
+    if (!currentDate) {
+        alert("Pilih tanggal.");
+        return;
+    }
+
+    const d = getData(currentDate);
+
+    document.getElementById("name").value =
+        d.name || "";
+
+    document.getElementById("pushup").value =
+        d.pushup || "";
+
+    document.getElementById("lapangan").value =
+        d.lapangan || "";
+
+    document.getElementById("mandi").value =
+        d.mandi || "";
+
+    document.getElementById("belajarSesi").value =
+        d.belajarSesi || "";
+
+    document.getElementById("belajarMenit").value =
+        d.belajarMenit || "";
+
+    document.getElementById("jarak").value =
+        d.jarak || "";
+
+    document.getElementById("speed").value =
+        d.speed || "";
+
+    document.getElementById("klarifikasi").value =
+        d.klarifikasi || "belum";
+
+    document.getElementById("maaf").value =
+        d.maaf || "";
+
+    document.getElementById("situp").value =
+        d.situp || "";
+
+    document.getElementById("battery").value =
+        d.battery || "aman";
+
+
+    for (let i = 1; i <= 6; i++) {
+
+        document.getElementById("check" + i).checked =
+            d.items[i] === true;
 
     }
 
-    return db[selected];
+
+    updateEverything();
 
 }
 
 
-/* =========================================
-   SIMPAN DATABASE
-========================================= */
+/* =====================================================
+   NEW DAY
+===================================================== */
 
-function saveDB() {
+function newDay() {
 
-    localStorage.setItem(
-        KEY,
-        JSON.stringify(db)
-    );
+    currentDate =
+        document.getElementById("date").value;
+
+    if (!currentDate) {
+        alert("Pilih tanggal.");
+        return;
+    }
+
+    getData(currentDate);
+
+    loadDay();
 
 }
 
 
-/* =========================================
-   LOAD DATA
-========================================= */
+/* =====================================================
+   APPROVE INDIVIDUAL ITEM
+===================================================== */
 
-function load() {
+function approveItem(id) {
 
-    selected =
-        document.getElementById(
-            "datePicker"
-        ).value || dateNow();
+    const d = getData(currentDate);
 
-
-    const d = getDay();
+    let valid = false;
 
 
-    const list =
-        document.getElementById(
-            "list"
+    /* PUSH UP */
+
+    if (id === 1) {
+
+        d.pushup =
+            Number(
+                document.getElementById("pushup").value
+            );
+
+        valid =
+            d.pushup >= BASE.pushup;
+    }
+
+
+    /* LAPANGAN */
+
+    if (id === 2) {
+
+        d.lapangan =
+            Number(
+                document.getElementById("lapangan").value
+            );
+
+        valid =
+            d.lapangan >= BASE.lapangan;
+    }
+
+
+    /* MANDI */
+
+    if (id === 3) {
+
+        d.mandi =
+            Number(
+                document.getElementById("mandi").value
+            );
+
+        valid =
+            d.mandi >= BASE.mandi;
+    }
+
+
+    /* BELAJAR */
+
+    if (id === 4) {
+
+        d.belajarSesi =
+            Number(
+                document.getElementById("belajarSesi").value
+            );
+
+        d.belajarMenit =
+            Number(
+                document.getElementById("belajarMenit").value
+            );
+
+        /*
+          3 sesi/minggu.
+          Untuk ACC harian, minimal durasi
+          sesi hari tersebut 30 menit.
+        */
+
+        valid =
+            d.belajarSesi >= BASE.belajarSesi &&
+            d.belajarMenit >= 30;
+    }
+
+
+    /* JOGGING */
+
+    if (id === 5) {
+
+        d.jarak =
+            Number(
+                document.getElementById("jarak").value
+            );
+
+        d.speed =
+            Number(
+                document.getElementById("speed").value
+            );
+
+        const file =
+            document.getElementById("bukti").files[0];
+
+        if (file) {
+            d.bukti = file.name;
+        }
+
+        valid =
+            d.jarak >= 5 &&
+            d.speed >= BASE.joggingSpeed &&
+            d.bukti !== "";
+    }
+
+
+    /* KLARIFIKASI */
+
+    if (id === 6) {
+
+        d.klarifikasi =
+            document.getElementById("klarifikasi").value;
+
+        valid =
+            d.klarifikasi === "sudah";
+    }
+
+
+    /*
+       Checkbox wajib dicentang
+       untuk melakukan ACC.
+    */
+
+    const checkbox =
+        document.getElementById("check" + id);
+
+
+    if (!checkbox.checked) {
+
+        alert(
+            "Centang pernyataan terlebih dahulu."
         );
 
+        return;
+    }
 
-    list.innerHTML = "";
 
+    if (!valid) {
 
-    consequences.forEach(
-        (c, i) => {
+        d.items[id] = false;
 
-            const done =
-                !!d.items[c[0]]?.done;
+        saveDatabase();
 
+        updateEverything();
 
-            const proof =
-                d.items[c[0]]?.proof || "";
+        alert(
+            "Data belum memenuhi target."
+        );
 
+        return;
+    }
 
-            list.innerHTML += `
 
-            <div
-                class="item ${done ? "done" : ""}"
-            >
+    d.items[id] = true;
 
-                <div class="row">
+    saveDatabase();
 
-                    <input
-                        class="check"
-                        type="checkbox"
-
-                        ${done ? "checked" : ""}
-
-                        onchange="
-                            toggle(
-                                '${c[0]}',
-                                this.checked
-                            )
-                        "
-                    >
-
-
-                    <div style="flex:1">
-
-                        <div class="title">
-
-                            ${i + 1}.
-                            ${c[1]}
-
-                        </div>
-
-
-                        <div class="status">
-
-                            ${
-                                done
-                                ? "✅ Terpenuhi"
-                                : "⏳ Belum terpenuhi"
-                            }
-
-                            —
-
-                            ${c[2]}
-
-                        </div>
-
-
-                        <div class="proof">
-
-                            <input
-
-                                value="${escapeAttr(proof)}"
-
-                                placeholder="
-                                Bukti / catatan / link...
-                                "
-
-                                onchange="
-                                    setProof(
-                                        '${c[0]}',
-                                        this.value
-                                    )
-                                "
-
-                            >
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            `;
-
-        }
-    );
-
-
-    document.getElementById(
-        "dayNote"
-    ).value = d.note || "";
-
-
-    updateStats();
-
-}
-
-
-/* =========================================
-   CHECKLIST
-========================================= */
-
-function toggle(id, val) {
-
-    const d = getDay();
-
-
-    d.items[id] = {
-
-        done: val,
-
-        proof:
-            d.items[id]?.proof || ""
-
-    };
-
-
-    saveDB();
-
-    load();
-
-}
-
-
-/* =========================================
-   BUKTI / CATATAN
-========================================= */
-
-function setProof(id, val) {
-
-    const d = getDay();
-
-
-    d.items[id] =
-        d.items[id] || {
-
-            done: false,
-
-            proof: ""
-
-        };
-
-
-    d.items[id].proof = val;
-
-
-    saveDB();
-
-    updateStats();
-
-}
-
-
-/* =========================================
-   SIMPAN
-========================================= */
-
-function save() {
-
-    getDay().note =
-        document.getElementById(
-            "dayNote"
-        ).value;
-
-
-    saveDB();
-
-    load();
-
+    updateEverything();
 
     alert(
-        "Data hari " +
-        selected +
-        " berhasil disimpan."
+        "Konsekuensi #" +
+        id +
+        " berhasil di-ACC."
     );
 
 }
 
 
-/* =========================================
-   UPDATE STATISTIK
-========================================= */
+/* =====================================================
+   ADDITIONAL
+===================================================== */
+
+function saveAdditional() {
+
+    const d = getData(currentDate);
+
+    d.maaf =
+        Number(
+            document.getElementById("maaf").value
+        );
+
+    d.situp =
+        Number(
+            document.getElementById("situp").value
+        );
+
+    d.battery =
+        document.getElementById("battery").value;
+
+    saveDatabase();
+
+    updatePenalty();
+
+    alert(
+        "Data tambahan berhasil disimpan."
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE EVERYTHING
+===================================================== */
+
+function updateEverything() {
+
+    updateStatuses();
+    updateStats();
+    updatePenalty();
+    renderHistory();
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function updateStatuses() {
+
+    const d = getData(currentDate);
+
+    for (let i = 1; i <= 6; i++) {
+
+        const element =
+            document.getElementById("status" + i);
+
+        if (d.items[i] === true) {
+
+            element.innerText =
+                "TERPENUHI";
+
+            element.className =
+                "status status-done";
+
+        }
+
+        else if (d.items[i] === false) {
+
+            element.innerText =
+                "TIDAK TERPENUHI";
+
+            element.className =
+                "status status-failed";
+
+        }
+
+        else {
+
+            element.innerText =
+                "BELUM";
+
+            element.className =
+                "status status-pending";
+        }
+    }
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
 
 function updateStats() {
 
-    const d = getDay();
+    const d = getData(currentDate);
 
-    let n = 0;
+    let done = 0;
+    let failed = 0;
 
+    for (let i = 1; i <= 6; i++) {
 
-    consequences.forEach(
-        c => {
+        if (d.items[i] === true)
+            done++;
 
-            if (
-                d.items[c[0]]?.done
-            ) {
+        if (d.items[i] === false)
+            failed++;
+    }
 
-                n++;
-
-            }
-
-        }
-    );
-
-
-    const p =
+    const percent =
         Math.round(
-            n / 6 * 100
+            (done / 6) * 100
         );
 
+    document.getElementById("done")
+        .innerText = done;
 
-    document.getElementById(
-        "totalDone"
-    ).textContent = n;
+    document.getElementById("failed")
+        .innerText = failed;
 
+    document.getElementById("percent")
+        .innerText = percent + "%";
 
-    document.getElementById(
-        "percent"
-    ).textContent = p + "%";
+    document.getElementById("progress")
+        .style.width = percent + "%";
 
-
-    document.getElementById(
-        "bar"
-    ).style.width = p + "%";
-
-
-    document.getElementById(
-        "progressText"
-    ).textContent =
-        n + " dari 6 terpenuhi";
+    document.getElementById("progressText")
+        .innerText =
+        done + " / 6 terpenuhi";
+}
 
 
-    /* HITUNG HARI LENGKAP */
+/* =====================================================
+   PENALTY +5
+===================================================== */
 
-    let days = 0;
+function updatePenalty() {
 
+    const d = getData(currentDate);
 
-    Object.values(db).forEach(
-        x => {
+    let failed = 0;
 
-            if (
-                consequences.every(
-                    c =>
-                        x.items?.[c[0]]?.done
-                )
-            ) {
+    for (let i = 1; i <= 6; i++) {
 
-                days++;
-
-            }
-
-        }
-    );
+        if (d.items[i] === false)
+            failed++;
+    }
 
 
-    document.getElementById(
-        "daysDone"
-    ).textContent = days;
+    /*
+       Tambahan penalty dihitung:
+       setiap konsekuensi gagal = +5
+    */
+
+    const penalty =
+        failed * 5;
+
+    d.failedCount =
+        failed;
+
+    d.addedPenalty =
+        penalty;
+
+    saveDatabase();
+
+
+    const container =
+        document.getElementById("penalty");
+
+
+    if (failed === 0) {
+
+        container.innerHTML = `
+            <div class="success-box">
+                ✅ Belum ada konsekuensi yang
+                tercatat gagal.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = `
+        <div class="penalty-box">
+
+            ⚠️ Terdapat
+            <strong>${failed}</strong>
+            konsekuensi yang tidak terpenuhi.
+
+            <br><br>
+
+            Penambahan administratif:
+
+            <strong>
+                +${penalty}
+            </strong>
+
+            <br><br>
+
+            Rumus:
+            ${failed} × 5 = ${penalty}
+
+        </div>
+    `;
 
 }
 
 
-/* =========================================
-   RESET HARI
-========================================= */
+/* =====================================================
+   FINAL APPROVE
+===================================================== */
+
+function finalApprove() {
+
+    const d = getData(currentDate);
+
+    let done = 0;
+
+    for (let i = 1; i <= 6; i++) {
+
+        if (d.items[i] === true)
+            done++;
+    }
+
+
+    if (done !== 6) {
+
+        alert(
+            "Belum bisa Final ACC.\n\n" +
+            "Konsekuensi terpenuhi: " +
+            done +
+            "/6"
+        );
+
+        return;
+    }
+
+
+    /*
+       Simpan tambahan
+    */
+
+    d.maaf =
+        Number(
+            document.getElementById("maaf").value
+        );
+
+    d.situp =
+        Number(
+            document.getElementById("situp").value
+        );
+
+    d.battery =
+        document.getElementById("battery").value;
+
+
+    d.approved = true;
+
+    saveDatabase();
+
+    updateEverything();
+
+    alert(
+        "✅ FINAL ACC BERHASIL!\n\n" +
+        currentDate
+    );
+
+}
+
+
+/* =====================================================
+   RESET DAY
+===================================================== */
 
 function resetDay() {
 
-    if (
+    const confirmDelete =
         confirm(
-            "Reset semua data untuk tanggal "
-            + selected
-            + "?"
-        )
-    ) {
+            "Yakin ingin menghapus seluruh data tanggal " +
+            currentDate +
+            "?"
+        );
 
-        delete db[selected];
+    if (!confirmDelete)
+        return;
 
-        saveDB();
 
-        load();
+    delete database[currentDate];
 
+    saveDatabase();
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function renderHistory() {
+
+    const container =
+        document.getElementById("history");
+
+    const dates =
+        Object.keys(database)
+        .sort()
+        .reverse();
+
+
+    if (dates.length === 0) {
+
+        container.innerHTML =
+            "Belum ada riwayat.";
+
+        return;
     }
 
-}
+
+    container.innerHTML = "";
 
 
-/* =========================================
-   ESCAPE INPUT
-========================================= */
+    dates.forEach(date => {
 
-function escapeAttr(s) {
+        const d =
+            database[date];
 
-    return String(s)
+        let done = 0;
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        for (let i = 1; i <= 6; i++) {
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        );
-
-}
-
-
-/* =========================================
-   EXPORT DATA
-========================================= */
-
-function exportData() {
-
-    const blob =
-        new Blob(
-            [
-                JSON.stringify(
-                    db,
-                    null,
-                    2
-                )
-            ],
-            {
-                type:
-                    "application/json"
-            }
-        );
-
-
-    const a =
-        document.createElement(
-            "a"
-        );
-
-
-    a.href =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    a.download =
-        "konsekuensi-aka-data.json";
-
-
-    a.click();
-
-}
-
-
-/* =========================================
-   IMPORT DATA
-========================================= */
-
-function importData() {
-
-    const inp =
-        document.createElement(
-            "input"
-        );
-
-
-    inp.type = "file";
-
-    inp.accept = ".json";
-
-
-    inp.onchange = () => {
-
-        const r =
-            new FileReader();
-
-
-        r.onload = () => {
-
-            try {
-
-                db =
-                    JSON.parse(
-                        r.result
-                    );
-
-
-                saveDB();
-
-                load();
-
-
-                alert(
-                    "Data berhasil di-import."
-                );
-
-
-            } catch (e) {
-
-                alert(
-                    "File tidak valid."
-                );
-
-            }
-
-        };
-
-
-        r.readAsText(
-            inp.files[0]
-        );
-
-    };
-
-
-    inp.click();
-
-}
-
-
-/* =========================================
-   EVENT
-========================================= */
-
-document
-    .getElementById(
-        "datePicker"
-    )
-    .addEventListener(
-        "change",
-        load
-    );
-
-
-document
-    .getElementById(
-        "dayNote"
-    )
-    .addEventListener(
-        "input",
-        () => {
-
-            getDay().note =
-                document.getElementById(
-                    "dayNote"
-                ).value;
-
-
-            saveDB();
-
+            if (d.items[i] === true)
+                done++;
         }
-    );
 
 
-/* =========================================
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "history-item";
+
+
+        div.innerHTML = `
+
+            <div class="history-header">
+
+                <strong>
+                    📅 ${date}
+                </strong>
+
+                ${
+                    d.approved
+
+                    ?
+
+                    '<span class="approved">✅ ACC</span>'
+
+                    :
+
+                    '<span class="not-approved">⏳ Belum ACC</span>'
+                }
+
+            </div>
+
+
+            <div class="small">
+
+                Progress:
+                <strong>
+                    ${done}/6
+                </strong>
+
+                <br><br>
+
+                Push Up:
+                ${d.pushup || 0}x
+
+                <br>
+
+                Lapangan:
+                ${d.lapangan || 0}x
+
+                <br>
+
+                Mandi:
+                ${d.mandi || 0}x
+
+                <br>
+
+                Belajar:
+                ${d.belajarSesi || 0} sesi
+
+                <br>
+
+                Jogging:
+                ${d.jarak || 0} km
+                @
+                ${d.speed || 0} km/jam
+
+                <br>
+
+                Klarifikasi:
+                ${d.klarifikasi === "sudah"
+                    ? "Sudah"
+                    : "Belum"}
+
+                <br>
+
+                Minta maaf:
+                ${d.maaf || 0}/200
+
+                <br>
+
+                Sit Up:
+                ${d.situp || 0}/50
+
+                <br>
+
+                Baterai:
+                ${d.battery === "aman"
+                    ? "Aman"
+                    : "HP mati"}
+
+                <br>
+
+                Penambahan:
+                +${d.addedPenalty || 0}
+
+            </div>
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   FILE NAME
+===================================================== */
+
+document
+.getElementById("bukti")
+.addEventListener(
+    "change",
+    function() {
+
+        const file =
+            this.files[0];
+
+        if (!file)
+            return;
+
+        document.getElementById(
+            "fileName"
+        ).innerText =
+            "Bukti: " + file.name;
+
+    }
+);
+
+
+/* =====================================================
+   DATE CHANGE
+===================================================== */
+
+document
+.getElementById("date")
+.addEventListener(
+    "change",
+    function() {
+
+        currentDate =
+            this.value;
+
+        loadDay();
+
+    }
+);
+
+
+/* =====================================================
    START
-========================================= */
+===================================================== */
 
-document.getElementById(
-    "datePicker"
-).value = dateNow();
+getData(currentDate);
 
+loadDay();
 
-load();
+renderHistory();
 
 </script>
 
